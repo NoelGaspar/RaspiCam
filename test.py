@@ -2,6 +2,7 @@
 import json, signal, sys, os
 import board
 import neopixel
+from gpiozero.pins.pigpio import PiGPIOFactory
 from gpiozero import Servo
 
 from picamera import PiCamera
@@ -13,6 +14,7 @@ SERVO_PIN = 12
 RGB_PIN   = board.D18
 NUM_LEDS  = 4
 RGB_ORDER = neopixel.RGB
+pigpio_factory = PiGPIOFactory()
 
 class budaToken():
   def __init__(self, servo_pin = SERVO_PIN):
@@ -20,7 +22,7 @@ class budaToken():
     # Start rpi camera
     self.camera = PiCamera()
     # Start servomotor
-    self.servo = Servo(servo_pin)
+    self.servo = Servo(servo_pin, pin_factory = pigpio_factory)
 
   ''' Set status led state '''
   def statusLed(self, state):
@@ -37,11 +39,11 @@ class budaToken():
   ''' Triggers servomotor '''
   def servoPush(self):
     print("moving motors")
-    self.servo.value = 0
+    self.servo.mid()
     sleep(1)
-    self.servo.value = -1
+    self.servo.min()
     sleep(0.5)
-    self.servo.value = 0
+    self.servo.mid()
     sleep(1)
 
   ''' Takes picture using rpi camera '''
