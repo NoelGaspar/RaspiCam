@@ -10,13 +10,13 @@ from datetime import datetime
 
 
 SERVO_PIN = 12
-RGB_PIN   = board.18
+RGB_PIN   = board.D18
 NUM_LEDS  = 4
 RGB_ORDER = neopixel.RGB
 
 class budaToken():
   def __init__(self, servo_pin = SERVO_PIN):
-    self.RGB         = neopixel.neopixel(RGB_PIN,NUM_LEDS,brightness=0.2, auto_write=False,pixel_order=RGB_ORDER)
+    self.RGB         = neopixel.NeoPixel(RGB_PIN,NUM_LEDS,brightness=0.2, auto_write=False,pixel_order=RGB_ORDER)
     # Start rpi camera
     self.camera = PiCamera()
     # Start servomotor
@@ -59,4 +59,4 @@ class budaToken():
 if __name__ == "__main__":
 
   buda = budaToken()
-  buda = takePhotoFull()
+  buda.takePhotoFull()
