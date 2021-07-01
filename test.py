@@ -39,11 +39,11 @@ class budaToken():
   ''' Triggers servomotor '''
   def servoPush(self):
     print("moving motors")
-    self.servo.mid()
+    self.servo.value = 0
     sleep(1)
-    self.servo.min()
+    self.servo.value =  -0.4
     sleep(0.5)
-    self.servo.mid()
+    self.servo.value = 0
     sleep(1)
 
   ''' Takes picture using rpi camera '''
