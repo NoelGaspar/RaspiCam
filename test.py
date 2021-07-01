@@ -54,6 +54,7 @@ class budaToken():
 
   def takePhotoFull(self):
     self.servoPush()
+    sleep(2)
     self.flashLed(1)
     self.takePhoto()
     self.flashLed(0)
